@@ -1,5 +1,5 @@
-### 1.基本使用
-#### 1.1 父类选择器
+### 基本使用
+#### 父类选择器
 Sass 允许将一套 CSS 样式嵌套进另一套样式中，内层的样式将它外层的选择器作为父选择器，例如：
 ```` a {
   font-weight: bold;
@@ -41,20 +41,4 @@ a {
 #### 1.3 占位符选择器 %foo (Placeholder Selectors: %foo)
 ````
 ?????????????????????????????????????????????????????
-````
-
-
-### 3. SassScript
-#### 3.1 Interactive Shell
-Interactive Shell 可以在命令行中测试 SassScript 的功能。在命令行中输入 sass -i，然后输入想要测试的 SassScript 查看输出结果：
-```` 
-$ sass -i
->> "Hello, Sassy World!"
-"Hello, Sassy World!"
->> 1px + 1px + 1px
-3px
->> #777 + #777
-#eeeeee
->> #777 + #888
-white
 ````
