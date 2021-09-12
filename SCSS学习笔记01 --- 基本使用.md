@@ -22,7 +22,7 @@ a {
 编译后的 CSS 文件中 & 将被替换成嵌套外层的父选择器，如果含有多层嵌套，最外层的父选择器会一层一层向下传递
 & 必须作为选择器的第一个字符，其后可以跟随后缀生成复合的选择器
 
-#### 1.2 属性嵌套 (Nested Properties)
+####属性嵌套 (Nested Properties)
 有些 CSS 属性遵循相同的命名空间 (namespace)，比如 font-family, font-size, font-weight 都以 font 作为属性的命名空间。为了便于管理这样的属性，同时也为了避免了重复输入，Sass 允许将属性嵌套在命名空间中，例如：
 ````.funky {
   font: {
@@ -38,7 +38,7 @@ a {
   font-weight: bold; }
 ````
 
-#### 1.3 占位符选择器 %foo (Placeholder Selectors: %foo)
+#### 占位符选择器 %foo (Placeholder Selectors: %foo)
 ````
 ?????????????????????????????????????????????????????
 ````
