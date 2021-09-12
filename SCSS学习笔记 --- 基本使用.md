@@ -32,4 +32,8 @@ a {
   }
 }````
 编译为
+````.funky {
+  font-family: fantasy;
+  font-size: 30em;
+  font-weight: bold; }
 ````
