@@ -15,4 +15,4 @@ $ sass -i
 white
 ````
 
-#### 数组(Lists)
+#### 变量$ (Variables: $)
