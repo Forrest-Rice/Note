@@ -1,4 +1,4 @@
-````
+```
 function toDecimal2 (x) {
   var f = parseFloat(x)
   if (isNaN(f)) {
@@ -20,11 +20,12 @@ function toDecimal2 (x) {
 export default {
  toDecimal2
 }
-````
+```
 
-````
+```
 import newPrice  from './config/api'
-````
-````
+```
+
+```
  <div class="price">¥{{newPrice(item.price)}}</div>
-````
+```

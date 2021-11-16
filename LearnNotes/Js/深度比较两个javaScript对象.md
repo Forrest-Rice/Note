@@ -1,15 +1,19 @@
-### 深度比较两个Javascript对象
+### 深度比较两个 Javascript 对象
+
 #### 写在前面
-````
+
+```
 近日遇到的一个需求需要比较两个对象，对象的属性类型相同，属性的值相同，就认为是两个对象是相同的，唯恐自己写的方法不够精炼，因此google找到了解决办法，特此记下。
 方法出处：http://stackoverflow.com/questions/1068834/object-comparison-in-javascript
-````
+```
 
 #### 方法一：Object.toJSON() 或 Object.stringify()
-````
+
+```
 此方法简单，适用于当两个对象的属性顺序相同的时候。
-````
-````
+```
+
+```
 var user1 = {name : "nerd", org: "dev"};
 var user2 = {name : "nerd", org: "dev"};
 var eq = user1 == user2;
@@ -18,13 +22,15 @@ alert(eq); // gives false
 // var eq1 = Object.toJSON(user1) == Object.toJSON(user2);
 var eq1 = JSON.stringify(user1) === JSON.stringify(user2)
 alert(eq1); // gives true
-````
+```
 
 #### 方法二：深度比较两个对象（推荐）
-````
+
+```
 深度比较两个对象，当对象的属性类型相同且属性的值相同（对象的顺序可以不一样），两个对象就相等。
-````
-````
+```
+
+```
 
     function deepCompare(x, y) {
         var i, l, leftChain, rightChain;
@@ -38,7 +44,7 @@ alert(eq1); // gives true
                 return true;
             }
 
-            // Compare primitives and functions.     
+            // Compare primitives and functions.
             // Check if both arguments link to the same object.
             // Especially useful on the step where we compare prototypes
             if (x === y) {
@@ -138,5 +144,6 @@ alert(eq1); // gives true
 
         return true;
     }
-````
-可以把方法compare2Objects修改成自己想要的条件，比如说不限制属性的类型，只要属性的值相等就认为两个object相等。
+```
+
+可以把方法 compare2Objects 修改成自己想要的条件，比如说不限制属性的类型，只要属性的值相等就认为两个 object 相等。

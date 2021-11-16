@@ -1,6 +1,8 @@
-### 通过拓展运算符 和 filter来达到不改变原数组的情况下，添加和删除元素
+### 通过拓展运算符 和 filter 来达到不改变原数组的情况下，添加和删除元素
+
 #### 添加元素
-````
+
+```
 var numList = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 // 第一种方案
@@ -19,10 +21,11 @@ var newNumList = add(numList, 10)
 console.log('newNumList', newNumList) // newNumList , [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 console.log('numList', numList) // numList ,[1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-````
+```
 
 #### 删除元素
-````
+
+```
 var numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 // 第一种方案
@@ -42,4 +45,4 @@ function remove (arr, num) {
 var removeNumList = remove(numList, 10)
 console.log('newNumList', removeNumList) // newNumList , [1, 2, 3, 4, 5, 6, 7, 8, 9]
 console.log('numList', numList) // numList ,[1, 2, 3, 4, 5, 6, 7, 8, 9,10]
-````
+```

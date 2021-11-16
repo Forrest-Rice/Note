@@ -1,8 +1,12 @@
-### JS计算两个数组的交集、差集、并集、补集（多种实现方式）
+### JS 计算两个数组的交集、差集、并集、补集（多种实现方式）
+
 #### 方法一
+
 使用 ES5 语法来实现虽然会麻烦些，但兼容性最好，不用考虑浏览器 JavaScript 版本。也不用引入其他第三方库。
+
 ##### 直接使用 filter、concat 来计算
-````
+
+```
 var a = [1,2,3,4,5]
 var b = [2,4,6,8,10]
 //交集
@@ -20,11 +24,13 @@ console.log("a与b的交集：", c);
 console.log("a与b的差集：", d);
 console.log("a与b的补集：", e);
 console.log("a与b的并集：", f);
-````
+```
 
 ##### 对 Array 进行扩展
+
 为方便使用，我们可以对数组功能进行扩展，增加一些常用的方法。
-````
+
+```
 //数组功能扩展
 //数组迭代函数
 Array.prototype.each = function(fn){
@@ -72,9 +78,11 @@ Array.complement = function(a, b){
 Array.union = function(a, b){
  return a.concat(b).uniquelize();
 };
-````
+```
+
 使用样例
-````
+
+```
 var a = [1,2,3,4,5]
 var b = [2,4,6,8,10]
 console.log("数组a：", a);
@@ -83,12 +91,17 @@ console.log("a与b的交集：", Array.intersect(a, b));
 console.log("a与b的差集：", Array.minus(a, b));
 console.log("a与b的补集：", Array.complement(a, b));
 console.log("a与b的并集：", Array.union(a, b));
-````
+```
+
 #### 方法二
+
 ##### 原理
+
 而在 ES6 中我们可以借助扩展运算符（...）以及 Set 的特性实现相关计算，代码也会更加简单些。
+
 ##### 样例代码
-````
+
+```
 var a = [1,2,3,4,5]
 var b = [2,4,6,8,10]
 console.log("数组a：", a);
@@ -107,4 +120,4 @@ console.log("a与b的交集：", intersect);
 console.log("a与b的差集：", minus);
 console.log("a与b的补集：", complement);
 console.log("a与b的并集：", unionSet);
-````
+```
