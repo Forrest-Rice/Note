@@ -1,90 +1,59 @@
 /*
  * @Author: BianYu
  * @Date: 2021-10-14 09:32:35
- * @LastEditTime: 2021-11-14 14:55:03
+ * @LastEditTime: 2021-11-17 15:46:57
  * @LastEditors: BianYu
  * @Description: 组件通用方法
- * @FilePath: \warehousekeeperscreen_zhuhai\js\common.js
+ * @FilePath: \Note\common\until.js
  * @可以输入预定的版权声明、个性签名、空行等
  */
 
 // 数字处理方法
-
-/**
- * 对数字进行三位分割
- * @param {*} value  需要进行分割的数字
- * @returns  返回分割后的数字串
- */
-
-// 小数部分只显示两位小数
-
-var NumFormat = function (value) {
-  if (!value) return '0'
-  var intPart = Number(value).toFixed(0) // 获取整数部分
-  var intPartFormat = intPart.toString()
-    .replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
-  var floatPart = '.00' // 预定义小数部分
-  var value2Array = value.toString().split('.')
-  // =2表示数据有小数位
-  if (value2Array.length === 2) {
-    floatPart = value2Array[1].toString() // 拿到小数部分
-    if (floatPart.length === 1) {
-      // 补0
-      return intPartFormat + '.' + floatPart + '0'
-    } else {
-      return intPartFormat + '.' + floatPart
-    }
-  } else {
-    return intPartFormat
-  }
-}
-
-
-/**
- * 计算百分比
- * @param   {number} num   分子
- * @param   {number} total 分母
- * @returns {number} 返回数百分比
- */
-function Percentage(num, total) {
-  if (num == 0 || total == 0) {
-    return 0;
-  }
-  return (Math.round(num / total * 10000) / 100.00); // 小数点后两位百分比
-}
-
-/******* 
- * @description: 获取两数之间的随机数 包含边界值
- * @param {*} min 最小值
- * @param {*} max 最大值
- * @return {*}
- */
-function getRandomArbitrary(min, max) {
-
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
-
-  // return Math.random() * (max - min) + min;
-}
-
-/******* 
- * @description: 获取两数之间的随机整数
- * @param {*} min 最小值
- * @param {*} max 最大值
- * @return {*}
- */
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //不含最大值，含最小值
-}
-
 let NumUtil = {
+
+  /******* 
+   * @description: 金额格式化方法 -- 对数字进行三位分割 -- 小数部分只显示两位小数
+   * @param {Number} value 待处理金额
+   * @return {String}
+   */
+  amountFormat: function (value) {
+    if (!value) return '0'
+    var intPart = Number(value).toFixed(0) // 获取整数部分
+    var intPartFormat = intPart.toString()
+      .replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
+    var floatPart = '.00' // 预定义小数部分
+    var value2Array = value.toString().split('.')
+    // =2表示数据有小数位
+    if (value2Array.length === 2) {
+      floatPart = value2Array[1].toString() // 拿到小数部分
+      if (floatPart.length === 1) {
+        // 补0
+        return intPartFormat + '.' + floatPart + '0'
+      } else {
+        return intPartFormat + '.' + floatPart
+      }
+    } else {
+      return intPartFormat
+    }
+  },
+
+  /******* 
+   * @description: 百分比计算方法
+   * @param {Number} num  分子
+   * @param {Number} total 分母
+   * @return {Number}
+   */
+  percentage: function (num, total) {
+    if (num == 0 || total == 0) {
+      return 0;
+    }
+    return (Math.round(num / total * 10000) / 100.00); // 小数点后两位百分比
+  },
+
   /******* 
    * @description: 金额单位转换方法
    * @param {number} value 待处理金额
-   * @return {*}
+   * @return {Object}
    */
   numberFormat: function (value) {
     var param = {};
@@ -100,11 +69,52 @@ let NumUtil = {
       param.unit = sizes[i] + '元';
     }
     return param;
+  },
+
+  /******* 
+   * @description: 获取两数之间的随机数 包含边界值
+   * @param {Number} min 最小值
+   * @param {Number} max 最大值
+   * @return {Number}
+   */
+  getRandomArbitrary: function (min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
+  },
+
+  /******* 
+   * @description: 获取两数之间的随机整数
+   * @param {Number} min 最小值
+   * @param {Number} max 最大值
+   * @return {Number}
+   */
+  getRandomInt: function (min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //不含最大值，含最小值
   }
 }
 
-// 时间处理方法
+let StrUtil = {
+  /******* 
+   * @description: 文字超长处理方法
+   * @param {String} val 待处理文本
+   * @param {Number} txtLength 保留长度
+   * @return {*}
+   */  
+  tableTextDisposeFun:function (val, txtLength) {
+    let txtSourceLength = val.length
+    if (txtSourceLength < txtLength) {
+      return val
+    } else {
+      return `${val.substr(0,txtLength)}...`
+    }
+  }
+}
 
+
+// 时间处理方法
 let DateUtil = {
   //日期格式部分
   yyyy_MM_dd_HH_mm_ss: "yyyy-MM-dd HH:mm:ss",
@@ -126,6 +136,7 @@ let DateUtil = {
       return false;
     }
   },
+
   /**
    * 判断是否为日期
    * @param date 不支持yyyyMMdd格式
@@ -138,6 +149,7 @@ let DateUtil = {
       return false;
     }
   },
+
   /**
    * 获取当前日期
    * @returns {Date}
@@ -153,6 +165,7 @@ let DateUtil = {
   getNowYear: function () {
     return new Date().getFullYear()
   },
+
   /**
    * 获取当前时间戳
    * @returns {number}
@@ -160,6 +173,7 @@ let DateUtil = {
   getNowTimeStamp: function () {
     return parseInt(Math.ceil(new Date().getTime()));
   },
+
   /**
    * Date日期格式化
    * @param date
@@ -201,6 +215,7 @@ let DateUtil = {
       return clock;
     }
   },
+
   /**
    * 日期字符串转时间戳
    * @param date  不支持yyyyMMdd格式
@@ -210,6 +225,7 @@ let DateUtil = {
     date = date.replace(/-/g, '/');
     return new Date(date).getTime();
   },
+  
   /**
    * 时间戳转日期字符串(yyyy-MM-dd HH:mm:ss)
    * @param timeStamp
@@ -225,6 +241,7 @@ let DateUtil = {
       (d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds());
     return date;
   },
+
   /**
    * 获取几天前日期(1代表明天，-1 代表前一天，-2前两天...)
    * @param date 指定日期
@@ -243,6 +260,7 @@ let DateUtil = {
     if (oDay.length <= 1) oDay = '0' + oDay;
     return oYear + separator + oMoth + separator + oDay;
   },
+
   /**
    * 获取前几月(1代表下月，-1 代表上月，-2上两月...)
    * @param date 指定日期
@@ -257,6 +275,7 @@ let DateUtil = {
     if (oMoth.length <= 1) oMoth = '0' + oMoth;
     return oYear + separator + oMoth;
   },
+
   /**
    * 判断某一年是否是闰年
    * @param year
@@ -265,6 +284,7 @@ let DateUtil = {
   isLeapYear: function (year) {
     return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
   },
+
   /**
    * 获取某年某个月的天数(西方月份)
    * @param year
@@ -273,6 +293,7 @@ let DateUtil = {
   getDaysOfMonthEN: function (year, month) {
     return [31, (this.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
   },
+
   /**
    * 获取某年某个月的天数(中国月份)
    * @param year
@@ -281,6 +302,7 @@ let DateUtil = {
   getDaysOfMonthCN: function (year, month) {
     return ['中国没有0月', 31, (this.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
   },
+
   /**
    * 计算一个日期是当年的第几天
    * @param date 字符串日期
@@ -297,6 +319,7 @@ let DateUtil = {
     }
     return days;
   },
+
   /**
    * 比较两个时间大小(不支持yyyyMMdd格式)
    *    date1>date2 return 1
@@ -313,6 +336,7 @@ let DateUtil = {
       return 0;
     }
   },
+
   /**
    * 获取本周开始日期
    * @returns {*|string}
@@ -322,6 +346,7 @@ let DateUtil = {
     let date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 1);
     return DateUtil.format(date, DateUtil.yyyy_MM_dd);
   },
+
   /**
    * 获取本周结束日期
    * @returns {*|string}
@@ -331,6 +356,7 @@ let DateUtil = {
     let date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (7 - now.getDay()));
     return DateUtil.format(date, DateUtil.yyyy_MM_dd);
   },
+
   /**
    * 获取上周开始日期
    * @returns {*|string}
@@ -340,6 +366,7 @@ let DateUtil = {
     let date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() - 6);
     return DateUtil.format(date, DateUtil.yyyy_MM_dd);
   },
+
   /**
    * 获取上周结束日期
    * @returns {*|string}
@@ -349,7 +376,6 @@ let DateUtil = {
     let date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
     return DateUtil.format(date, DateUtil.yyyy_MM_dd);
   },
-
 
   /******* 
    * @description: 生成随机时间
@@ -372,7 +398,7 @@ let DateUtil = {
 
 
 /**
- * @description:  表格分页方法
+ * @description:  分页方法
  * @param {*} awaitList 带分页数组
  * @param {*} pageNo 当前页
  * @param {*} pageSize 每页条数
@@ -416,19 +442,4 @@ function paginationFun(awaitList, pageNo, pageSize) {
   }
 
 
-}
-
-/**
- * @description: 表格文字超长处理方法
- * @param {String} val 待处理文本
- * @param {number} txtLength 保留长度
- * @return {*}
- */
-function tableTextDisposeFun(val, txtLength) {
-  let txtSourceLength = val.length
-  if (txtSourceLength < txtLength) {
-    return val
-  } else {
-    return `${val.substr(0,txtLength)}...`
-  }
 }
