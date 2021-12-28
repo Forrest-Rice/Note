@@ -87,4 +87,5 @@ mounted() {
 </script>
 ```
 1、在项目中 window.onresize只能挂载一次，在多个页面中同时挂载 window.onresize时，只有其中一个 window.onresize会起作用
+
 2、避免 window.onresize频繁挂载（待续）
